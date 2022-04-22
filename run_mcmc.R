@@ -124,7 +124,8 @@ mcmc_output$trace %>%
                                 rep(mean(mcmc_output$trace[,"beta"]), n.iterations),
                                 rep(mean(mcmc_output$trace[,"gamma"]), n.iterations)),
                  color = "Average from mcmc")) +
-  theme(legend.position = "bottom")
+  theme(legend.position = "bottom") +
+  labs(x = "Step", y = "Value")
 
 #look at the distribution of parameter values in the mcmc
 mcmc_output$trace %>%
@@ -139,7 +140,8 @@ mcmc_output$trace %>%
                                 rep(theta[2], n.iterations),
                                 rep(theta[3], n.iterations),
                                 rep(theta[4], n.iterations))),
-             color = "blue")
+             color = "blue") +
+  labs(x = "Value", y = "Count")
   
 #run the model with the best set of parameter values
 best_fit = model$simulate(theta = mcmc_output$trace[which.max(mcmc_output$trace[,"log.density"]),],
