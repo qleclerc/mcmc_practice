@@ -9,6 +9,14 @@ if(!require(here, quietly = T)) install.packages("here")
 if(!require(dplyr, quietly = T)) install.packages("dplyr")
 if(!require(reshape2, quietly = T)) install.packages("reshape2")
 
+library(devtools)
+library(fitR)
+library(ggplot)
+library(scales2)
+library(here)
+library(dplyr)
+library(reshape2)
+
 source(here::here("mcmc_function.R"))
 model = readRDS(here::here("bac_model.rds"))
 
