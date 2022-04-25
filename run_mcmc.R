@@ -108,10 +108,23 @@ ggplot() +
 #choose number of iterations
 n.iterations = 1000
 
+#things you can try to play around with:
+# 1) change the number of iterations
+# 2) adjust proposal.sd (currently equal to 0.01 of each parameter initial value - what happens if you
+#     divide by 10 instead? 1000?)
+# 3) change the initial parameter values (init.theta)
+# 4) try running adaptive mcmc (adjust the adapt.size.start to determine after how many iterations
+#     the adaptive mcmc kicks in, adjust the adapt.shape start to determine after how many ACCEPTED
+#     iterations the mcmc will consider it has reached the target distribution point and will focus
+#     on exploring that target area instead of trying to move away)
+
 #run the mcmc
 mcmc_output = run_mcmc(model, lab_data,
                        init.theta = init.theta,
-                       n.iterations = n.iterations)
+                       proposal.sd = init.theta/c(100,100,100,100),
+                       n.iterations = n.iterations,
+                       adapt.size.start = 2000000,
+                       adapt.shape.start = 2000000)
 
 #look at the trajectory of parameter values in the mcmc
 mcmc_output$trace %>%
